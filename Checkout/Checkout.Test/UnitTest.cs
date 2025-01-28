@@ -101,5 +101,19 @@ namespace Checkout.Test
             Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(lineTotal));
         }
 
+
+        [Test]
+        public void CheckoutSpecialPriceCalculation()
+        {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
+            string sku = "A";
+            int unitPrice = 130;
+            checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(unitPrice));
+        }
+
     }
 }

@@ -42,7 +42,7 @@ namespace Checkout.BLL
                 if (scannedItemMaster != null)
                 {
                     ShopingCart scannedItem = scannedItems.Where(x => x.SKU == sku).FirstOrDefault();
-
+                    //No price calculation in scan time. Calculated in GetTotalPrice
 
                     if (scannedItem != null)
                     {
@@ -72,7 +72,7 @@ namespace Checkout.BLL
 
         public decimal GetTotalPrice()
         {
-            //set shoping cart price here, because of the frequent changes
+            //set shopping cart price here, because of the frequent changes
             foreach (ShopingCart scannedItem in scannedItems)
             {
                 ItemMaster scannedItemMaster = masterItems.Where(x => x.SKU == scannedItem.SKU).FirstOrDefault();
