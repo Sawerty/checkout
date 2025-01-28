@@ -31,8 +31,8 @@ namespace Checkout.BLL
         {
             if (masterItems.Count > 0)
             {
-
-                if (masterItems.Where(x => x.SKU == sku).FirstOrDefault() != null)
+                ItemMaster scannedItemMaster = masterItems.Where(x => x.SKU == sku).FirstOrDefault();
+                if (scannedItemMaster != null)
                 {
                     ShopingCart scannedItem = scannedItems.Where(x => x.SKU == sku).FirstOrDefault();
 
@@ -40,13 +40,15 @@ namespace Checkout.BLL
                     if (scannedItem != null)
                     {
                         scannedItem.Quantity++;
+                        scannedItem.LineTotal = scannedItem.LineTotal + scannedItemMaster.UnitPrice;
                     }
                     else
                     {
                         scannedItems.Add(new ShopingCart
                         {
                             SKU = sku,
-                            Quantity = 1
+                            Quantity = 1,
+                            LineTotal= scannedItemMaster.UnitPrice
                         });
                     }
                 }
