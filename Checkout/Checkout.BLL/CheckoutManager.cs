@@ -26,11 +26,17 @@ namespace Checkout.BLL
             if (masterItems.Count > 0)
             {
 
+                if (masterItems.Where(x => x.SKU == sku).FirstOrDefault() != null)
+                {
                     scannedItems.Add(new ShopingCart
                     {
                         SKU = sku
                     });
-
+                }
+                else
+                {
+                    throw new Exception("Item is not found!");
+                }
             }
             else
             {
