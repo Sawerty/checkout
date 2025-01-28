@@ -28,14 +28,15 @@ namespace Checkout.Test
             Assert.That(checkoutManager.GetItems().Count, Is.EqualTo(1));
         }
 
-        [Test]
-        public void AddItemToCheckoutAndValidateQty()
+        [TestCase("A",5)]
+        [TestCase("B", 2)]
+        [TestCase("C", 1)]
+        [TestCase("D", 9)]
+        public void AddItemToCheckoutAndValidateQty(string sku,int qty)
         {
             checkoutManager = new Checkout.BLL.CheckoutManager();
-            string sku = "A";
-            int qty = 1;
-
-            checkoutManager.Scan(sku);
+            for (int i = 0; i < qty; i++) 
+                checkoutManager.Scan(sku);
   
             Assert.That(checkoutManager.GetItem(sku).Quantity, Is.EqualTo(qty));
         }
