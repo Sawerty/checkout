@@ -7,3 +7,6 @@
 /Checkout/Checkout/obj
 /Checkout/Checkout.Test/bin/Debug/net8.0
 /Checkout/Checkout.Test/obj
+/Checkout/Checkout.BLL/obj
+/Checkout/Checkout.DAO/bin/Debug/net8.0
+/Checkout/Checkout.DAO/obj
