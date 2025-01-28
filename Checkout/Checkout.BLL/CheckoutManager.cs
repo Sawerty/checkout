@@ -6,7 +6,14 @@ namespace Checkout.BLL
 {
     public class CheckoutManager : ICheckoutManager
     {
-        List<ShopingCart> scannedItems = new List<ShopingCart>();
+        private List<ShopingCart> scannedItems = new List<ShopingCart>();
+        private List<ItemMaster> masterItems = new List<ItemMaster>();
+
+        public CheckoutManager()
+        {
+            GenerateTestItems generateTestItems = new GenerateTestItems();
+            masterItems= generateTestItems.GetItemMaster();
+        }
 
         public List<ShopingCart> GetItems()
         {
@@ -16,10 +23,19 @@ namespace Checkout.BLL
 
         public void Scan(string sku)
         {
-            scannedItems.Add(new ShopingCart
+            if (masterItems.Count > 0)
             {
-                SKU = sku
-            });
+
+                    scannedItems.Add(new ShopingCart
+                    {
+                        SKU = sku
+                    });
+
+            }
+            else
+            {
+                throw new Exception("No Item Master found!");
+            }
         }
     }
 }
