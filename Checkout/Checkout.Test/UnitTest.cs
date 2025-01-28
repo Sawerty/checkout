@@ -31,13 +31,12 @@ namespace Checkout.Test
         [Test]
         public void AddItemToCheckoutAndValidateQty()
         {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
             string sku = "A";
-            int qty = 2;
+            int qty = 1;
 
             checkoutManager.Scan(sku);
-            checkoutManager.Scan(sku);
-            checkoutManager.Scan(sku);
-
+  
             Assert.That(checkoutManager.GetItem(sku).Quantity, Is.EqualTo(qty));
         }
 

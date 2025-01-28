@@ -39,7 +39,7 @@ namespace Checkout.BLL
 
                     if (scannedItem != null)
                     {
-                        scannedItem.Quantity = scannedItem.Quantity + 1;
+                        scannedItem.Quantity++;
                     }
                     else
                     {
