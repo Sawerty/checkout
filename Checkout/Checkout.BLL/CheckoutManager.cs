@@ -35,7 +35,7 @@ namespace Checkout.BLL
                 }
                 else
                 {
-                    throw new Exception("Item is not found!");
+                    throw new ArgumentException("Item is not found!");
                 }
             }
             else

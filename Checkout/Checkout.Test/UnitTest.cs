@@ -1,3 +1,5 @@
+using System;
+
 namespace Checkout.Test
 {
     public class Tests
@@ -12,16 +14,25 @@ namespace Checkout.Test
 
 
 
+
         [Test]
         public void AddItemToCheckout()
         {
-            string sku = "X";
+            string sku = "A";
 
             checkoutManager.Scan(sku);
 
-
-
             Assert.That(checkoutManager.GetItems().Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void CheckInvalidItem()
+        {
+            string sku = "X";
+
+            
+
+            Assert.Throws<ArgumentException>(() => checkoutManager.Scan(sku));
         }
 
     }
