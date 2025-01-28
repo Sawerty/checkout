@@ -10,6 +10,7 @@ namespace Checkout.BLL.Interfaces
     public interface ICheckoutManager
     {
         void Scan(string sku);
+        ItemMaster GetItemMasterData(string sku);
         List<ShopingCart> GetItems();
         ShopingCart GetItem(string sku);
         decimal GetTotalPrice();

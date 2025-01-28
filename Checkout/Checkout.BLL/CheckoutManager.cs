@@ -21,6 +21,13 @@ namespace Checkout.BLL
             return scannedItems;
         }
 
+        public ItemMaster GetItemMasterData(string sku)
+        {
+
+            return masterItems.Where(x => x.SKU == sku).FirstOrDefault();
+        }
+
+
         public ShopingCart GetItem(string sku)
         {
 

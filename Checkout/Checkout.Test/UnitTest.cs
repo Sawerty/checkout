@@ -1,3 +1,4 @@
+using Checkout.DAO;
 using System;
 
 namespace Checkout.Test
@@ -57,6 +58,18 @@ namespace Checkout.Test
             checkoutManager.Scan(sku);
 
             Assert.That(checkoutManager.GetTotalPrice(),Is.EqualTo(unitPrice));
+        }
+
+        [TestCase("A", 5)]
+        public void CheckoutPriceCalculationWithMultipleQty(string sku, int qty)
+        {
+            decimal lineTotal = 0;
+            ItemMaster itemMaster= checkoutManager.GetItemMasterData(sku);
+            lineTotal = itemMaster.UnitPrice * qty;
+            for (int i = 0; i < qty; i++)
+                checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(lineTotal));
         }
 
     }
