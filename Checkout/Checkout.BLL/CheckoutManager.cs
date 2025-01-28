@@ -28,10 +28,21 @@ namespace Checkout.BLL
 
                 if (masterItems.Where(x => x.SKU == sku).FirstOrDefault() != null)
                 {
-                    scannedItems.Add(new ShopingCart
+                    ShopingCart scannedItem = scannedItems.Where(x => x.SKU == sku).FirstOrDefault();
+
+
+                    if (scannedItem != null)
                     {
-                        SKU = sku
-                    });
+                        scannedItem.Quantity = scannedItem.Quantity + 1;
+                    }
+                    else
+                    {
+                        scannedItems.Add(new ShopingCart
+                        {
+                            SKU = sku,
+                            Quantity = 1
+                        });
+                    }
                 }
                 else
                 {

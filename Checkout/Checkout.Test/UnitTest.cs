@@ -26,7 +26,7 @@ namespace Checkout.Test
             checkoutManager.Scan(sku);
             checkoutManager.Scan(sku);
 
-            Assert.That(checkoutManager.GetItems().Count, Is.EqualTo(0));
+            Assert.That(checkoutManager.GetItems().Count, Is.EqualTo(1));
         }
 
         [Test]
