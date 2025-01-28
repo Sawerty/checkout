@@ -18,7 +18,6 @@ namespace Checkout.Test
         [Test]
         public void AddItemToCheckout()
         {
-
             //Add items multiple times and check if the quantity is incresed or not
             string sku = "A";
 
@@ -30,11 +29,22 @@ namespace Checkout.Test
         }
 
         [Test]
+        public void AddItemToCheckoutAndValidateQty()
+        {
+            string sku = "A";
+            int qty = 2;
+
+            checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetItem(sku).Quantity, Is.EqualTo(qty));
+        }
+
+        [Test]
         public void CheckInvalidItem()
         {
             string sku = "X";
-
-            
 
             Assert.Throws<ArgumentException>(() => checkoutManager.Scan(sku));
         }

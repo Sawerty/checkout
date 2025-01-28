@@ -21,6 +21,12 @@ namespace Checkout.BLL
             return scannedItems;
         }
 
+        public ShopingCart GetItem(string sku)
+        {
+
+            return scannedItems.Where(x=>x.SKU==sku).FirstOrDefault();
+        }
+
         public void Scan(string sku)
         {
             if (masterItems.Count > 0)
