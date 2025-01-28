@@ -61,8 +61,12 @@ namespace Checkout.Test
         }
 
         [TestCase("A", 5)]
+        [TestCase("B", 2)]
+        [TestCase("C", 1)]
+        [TestCase("D", 9)]
         public void CheckoutPriceCalculationWithMultipleQty(string sku, int qty)
         {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
             decimal lineTotal = 0;
             ItemMaster itemMaster= checkoutManager.GetItemMasterData(sku);
             lineTotal = itemMaster.UnitPrice * qty;
