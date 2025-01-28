@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Checkout.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace Checkout.BLL.Interfaces
     public interface ICheckoutManager
     {
         void Scan(string sku);
+        List<ShopingCart> GetItems();
     }
 }
