@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Checkout/.vs/Checkout
+/Checkout/Checkout/bin/Debug/net8.0
+/Checkout/Checkout/obj
+/Checkout/Checkout.Test/bin/Debug/net8.0
+/Checkout/Checkout.Test/obj
