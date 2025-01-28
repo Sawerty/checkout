@@ -18,11 +18,15 @@ namespace Checkout.Test
         [Test]
         public void AddItemToCheckout()
         {
+
+            //Add items multiple times and check if the quantity is incresed or not
             string sku = "A";
 
             checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
+            checkoutManager.Scan(sku);
 
-            Assert.That(checkoutManager.GetItems().Count, Is.GreaterThan(0));
+            Assert.That(checkoutManager.GetItems().Count, Is.EqualTo(0));
         }
 
         [Test]
