@@ -12,6 +12,6 @@ namespace Checkout.BLL.Interfaces
         void Scan(string sku);
         List<ShopingCart> GetItems();
         ShopingCart GetItem(string sku);
-        int GetTotalPrice();
+        decimal GetTotalPrice();
     }
 }

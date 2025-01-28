@@ -61,9 +61,9 @@ namespace Checkout.BLL
             }
         }
 
-        public int GetTotalPrice()
+        public decimal GetTotalPrice()
         {
-            int totalPrice = 0;
+            decimal totalPrice = scannedItems.Sum(x => x.LineTotal);
 
             return totalPrice;
         }
