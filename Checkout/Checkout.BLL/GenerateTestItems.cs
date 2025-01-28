@@ -11,6 +11,8 @@ namespace Checkout.BLL
     {
         private List<ItemMaster> itemMasters;
 
+        private List<SpecialPrice> specialPriceMasters;
+
         public GenerateTestItems()
         {
             itemMasters=new List<ItemMaster>();
@@ -19,6 +21,10 @@ namespace Checkout.BLL
             itemMasters.Add(new ItemMaster { SKU = "C", UnitPrice = 20 });
             itemMasters.Add(new ItemMaster { SKU = "D", UnitPrice = 15 });
 
+
+            specialPriceMasters = new List<SpecialPrice>();
+            specialPriceMasters.Add(new SpecialPrice { SKU = "A", Quantity = 3, Price = 130 });
+            specialPriceMasters.Add(new SpecialPrice { SKU = "B", Quantity = 2, Price = 45 });
         }
 
 

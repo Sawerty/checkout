@@ -47,15 +47,15 @@ namespace Checkout.BLL
                     if (scannedItem != null)
                     {
                         scannedItem.Quantity++;
-                        scannedItem.LineTotal = scannedItem.LineTotal + scannedItemMaster.UnitPrice;
+       
                     }
                     else
                     {
                         scannedItems.Add(new ShopingCart
                         {
                             SKU = sku,
-                            Quantity = 1,
-                            LineTotal= scannedItemMaster.UnitPrice
+                            Quantity = 1
+                           
                         });
                     }
                 }
@@ -72,6 +72,14 @@ namespace Checkout.BLL
 
         public decimal GetTotalPrice()
         {
+            //set shoping cart price here, because of the frequent changes
+            foreach (ShopingCart scannedItem in scannedItems)
+            {
+                ItemMaster scannedItemMaster = masterItems.Where(x => x.SKU == scannedItem.SKU).FirstOrDefault();
+                scannedItem.LineTotal = scannedItem.Quantity * scannedItemMaster.UnitPrice;
+
+            }
+
             decimal totalPrice = scannedItems.Sum(x => x.LineTotal);
 
             return totalPrice;

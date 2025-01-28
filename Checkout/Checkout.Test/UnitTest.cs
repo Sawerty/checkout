@@ -20,6 +20,7 @@ namespace Checkout.Test
         public void AddItemToCheckout()
         {
             //Add items multiple times and check if the quantity is incresed or not
+            checkoutManager = new Checkout.BLL.CheckoutManager();
             string sku = "A";
 
             checkoutManager.Scan(sku);
@@ -53,6 +54,7 @@ namespace Checkout.Test
         [Test]
         public void CheckoutPriceCalculation()
         {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
             string sku = "A";
             int unitPrice = 50;
             checkoutManager.Scan(sku);
