@@ -15,9 +15,9 @@ namespace Checkout.Test
         [Test]
         public void AddItemToCheckout()
         {
-          
+            string sku = "A";
 
-            checkoutManager.Scan("");
+            checkoutManager.Scan(sku);
 
 
 
