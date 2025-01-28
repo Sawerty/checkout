@@ -49,5 +49,15 @@ namespace Checkout.Test
             Assert.Throws<ArgumentException>(() => checkoutManager.Scan(sku));
         }
 
+        [Test]
+        public void CheckoutPriceCalculation()
+        {
+            string sku = "A";
+            int unitPrice = 50;
+            checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetTotalPrice(),Is.EqualTo(unitPrice));
+        }
+
     }
 }

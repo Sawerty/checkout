@@ -60,5 +60,12 @@ namespace Checkout.BLL
                 throw new Exception("No Item Master found!");
             }
         }
+
+        public int GetTotalPrice()
+        {
+            int totalPrice = 0;
+
+            return totalPrice;
+        }
     }
 }
