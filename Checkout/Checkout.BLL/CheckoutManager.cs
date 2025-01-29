@@ -17,6 +17,10 @@ namespace Checkout.BLL
             specialPrices = generateTestItems.GetSpecialPrices();
         }
 
+#region MasterData management. 
+        //This is supposed to be in a database, so unit test also could use that instead getting them from here.
+
+
         public List<ShopingCart> GetItems()
         {
            
@@ -25,7 +29,7 @@ namespace Checkout.BLL
 
         public ItemMaster GetItemMasterData(string sku)
         {
-
+            
             return masterItems.Where(x => x.SKU == sku).FirstOrDefault();
         }
 
@@ -41,6 +45,7 @@ namespace Checkout.BLL
 
             return scannedItems.Where(x=>x.SKU==sku).FirstOrDefault();
         }
+#endregion
 
         public void Scan(string sku)
         {

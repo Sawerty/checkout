@@ -118,6 +118,7 @@ namespace Checkout.Test
         [Test]
         public void CheckoutSpecialPriceCalculationWithMultipleItemsAndQty()
         {
+            //mixing item with special price and normal price
             checkoutManager = new Checkout.BLL.CheckoutManager();
             string sku = "A";
             int qty = 5;
@@ -151,6 +152,38 @@ namespace Checkout.Test
             }
             else
                 totalPrice = totalPrice+itemMaster.UnitPrice * qty;
+            for (int i = 0; i < qty; i++)
+                checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(totalPrice));
+        }
+
+
+        [TestCase("A", 5)]
+        [TestCase("B", 2)]
+        [TestCase("C", 1)]
+        [TestCase("D", 9)]
+        [TestCase("A", 105)]
+        [TestCase("B", 3)]
+        [TestCase("C", 99)]
+        [TestCase("D", 50)]
+        public void CheckoutSpecialPriceCalculationWithMultipleQty(string sku, int qty)
+        {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
+            decimal totalPrice = 0;
+            ItemMaster itemMaster = checkoutManager.GetItemMasterData(sku);
+
+            SpecialPrice specialPrice = checkoutManager.GetItemSpecialPrice(sku);
+            if (specialPrice != null)
+            {
+                if (qty >= specialPrice.Quantity)
+                {
+                    totalPrice = specialPrice.DiscountedPrice * qty;
+                }
+            }
+            else
+                totalPrice = itemMaster.UnitPrice * qty;
+ 
             for (int i = 0; i < qty; i++)
                 checkoutManager.Scan(sku);
 
