@@ -115,5 +115,47 @@ namespace Checkout.Test
             Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(unitPrice));
         }
 
+        [Test]
+        public void CheckoutSpecialPriceCalculationWithMultipleItemsAndQty()
+        {
+            checkoutManager = new Checkout.BLL.CheckoutManager();
+            string sku = "A";
+            int qty = 5;
+            decimal totalPrice = 0;
+            ItemMaster itemMaster = checkoutManager.GetItemMasterData(sku);
+            SpecialPrice specialPrice = checkoutManager.GetItemSpecialPrice(sku);
+            if (specialPrice != null)
+            {
+                if (qty >= specialPrice.Quantity)
+                {
+                    totalPrice = specialPrice.DiscountedPrice * qty;
+                }
+            }
+            else 
+                totalPrice = itemMaster.UnitPrice * qty;
+                        
+            for (int i = 0; i < qty; i++)
+                checkoutManager.Scan(sku);
+
+
+            sku = "C";
+            qty = 3;
+            itemMaster = checkoutManager.GetItemMasterData(sku);
+            specialPrice = checkoutManager.GetItemSpecialPrice(sku);
+            if (specialPrice != null)
+            {
+                if (qty >= specialPrice.Quantity)
+                {
+                    totalPrice = totalPrice+specialPrice.DiscountedPrice * qty;
+                }
+            }
+            else
+                totalPrice = totalPrice+itemMaster.UnitPrice * qty;
+            for (int i = 0; i < qty; i++)
+                checkoutManager.Scan(sku);
+
+            Assert.That(checkoutManager.GetTotalPrice(), Is.EqualTo(totalPrice));
+        }
+
     }
 }
