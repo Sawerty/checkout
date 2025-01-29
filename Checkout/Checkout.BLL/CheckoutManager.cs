@@ -29,6 +29,12 @@ namespace Checkout.BLL
             return masterItems.Where(x => x.SKU == sku).FirstOrDefault();
         }
 
+        public SpecialPrice GetItemSpecialPrice(string sku)
+        {
+
+            return specialPrices.Where(x => x.SKU == sku).FirstOrDefault();
+        }
+
 
         public ShopingCart GetItem(string sku)
         {
@@ -81,9 +87,11 @@ namespace Checkout.BLL
                 SpecialPrice specialPrice = specialPrices.Where(x => x.SKU==scannedItem.SKU).FirstOrDefault();
                 if (specialPrice != null)
                 {
-                    //Special Price is available
-
-                    scannedItem.LineTotal = scannedItem.Quantity * specialPrice.DiscountedPrice;
+                    //Special Price is available but only apply if the qty is greater or equal with the spec price qty
+                    if (scannedItem.Quantity >= specialPrice.Quantity)
+                        scannedItem.LineTotal = scannedItem.Quantity * specialPrice.DiscountedPrice;
+                    else
+                        scannedItem.LineTotal = scannedItem.Quantity * scannedItemMaster.UnitPrice;
                 }
                 else
                 {

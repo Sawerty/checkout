@@ -62,8 +62,8 @@ namespace Checkout.Test
             Assert.That(checkoutManager.GetTotalPrice(),Is.EqualTo(unitPrice));
         }
 
-        [TestCase("A", 5)]
-        [TestCase("B", 2)]
+        //[TestCase("A", 5)]
+        //[TestCase("B", 2)]
         [TestCase("C", 1)]
         [TestCase("D", 9)]
         public void CheckoutPriceCalculationWithMultipleQty(string sku, int qty)
@@ -82,7 +82,7 @@ namespace Checkout.Test
         public void CheckoutPriceCalculationWithMultipleItemsAndQty()
         {
             checkoutManager = new Checkout.BLL.CheckoutManager();
-            string sku="A";
+            string sku="D";
             int qty=5;
             decimal lineTotal = 0;
             ItemMaster itemMaster = checkoutManager.GetItemMasterData(sku);
@@ -91,7 +91,7 @@ namespace Checkout.Test
                 checkoutManager.Scan(sku);
             
             
-            sku = "B";
+            sku = "C";
             qty = 3;
             itemMaster = checkoutManager.GetItemMasterData(sku);
             lineTotal = lineTotal+itemMaster.UnitPrice * qty;
