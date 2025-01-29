@@ -32,5 +32,10 @@ namespace Checkout.BLL
         {
             return itemMasters;
         }
+
+        public List<SpecialPrice> GetSpecialPrices()
+        {
+            return specialPriceMasters;
+        }
     }
 }

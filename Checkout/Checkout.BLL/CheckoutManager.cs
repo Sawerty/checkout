@@ -8,11 +8,13 @@ namespace Checkout.BLL
     {
         private List<ShopingCart> scannedItems = new List<ShopingCart>();
         private List<ItemMaster> masterItems = new List<ItemMaster>();
+        private List<SpecialPrice> specialPrices = new List<SpecialPrice>();
 
         public CheckoutManager()
         {
             GenerateTestItems generateTestItems = new GenerateTestItems();
             masterItems= generateTestItems.GetItemMaster();
+            specialPrices = generateTestItems.GetSpecialPrices();
         }
 
         public List<ShopingCart> GetItems()
@@ -76,8 +78,18 @@ namespace Checkout.BLL
             foreach (ShopingCart scannedItem in scannedItems)
             {
                 ItemMaster scannedItemMaster = masterItems.Where(x => x.SKU == scannedItem.SKU).FirstOrDefault();
-                scannedItem.LineTotal = scannedItem.Quantity * scannedItemMaster.UnitPrice;
+                SpecialPrice specialPrice = specialPrices.Where(x => x.SKU==scannedItem.SKU).FirstOrDefault();
+                if (specialPrice != null)
+                {
+                    //Special Price is available
 
+                    scannedItem.LineTotal = scannedItem.Quantity * specialPrice.DiscountedPrice;
+                }
+                else
+                {
+                    //No special price available, use standard price from Item Master
+                    scannedItem.LineTotal = scannedItem.Quantity * scannedItemMaster.UnitPrice;
+                }
             }
 
             decimal totalPrice = scannedItems.Sum(x => x.LineTotal);
